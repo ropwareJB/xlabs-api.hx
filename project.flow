@@ -1,0 +1,23 @@
+{
+  project : {
+    name : 'xlabs-sdk',
+    version : '1.0.0',
+    author : 'josh.epidev',
+
+    app : {
+      name : 'xlabs-sdk',
+      output : 'bin/',
+      package : 'com.xlabs',
+      codepaths : ['src/com/xlabs']
+    },
+
+    build : {
+      dependencies : {},
+      defines: ['web', 'arch-web']
+    },
+
+    files : {
+
+    }
+  }
+}
