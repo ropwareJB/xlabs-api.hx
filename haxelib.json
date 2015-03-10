@@ -1,0 +1,12 @@
+{
+    "name": "xlabs.api",
+    "license": "MIT",
+    "url": "https://github.com/Montycarlo/xlabs-sdk-haxe",
+    "description": "Xlabs SDK",
+    "releasenote": "Working with example, need to clean up",
+    "version": "0.0.1",
+    "classPath": "src",
+    "contributors": [ "josh.epidev" ],
+    "tags": ["xLabs"],
+    "dependencies": { }
+}

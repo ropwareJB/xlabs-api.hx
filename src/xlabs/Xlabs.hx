@@ -1,4 +1,5 @@
-import js.Lib;
+package xlabs;
+
 import js.Browser;
 import js.html.Screen;
 import js.Error;

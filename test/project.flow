@@ -1,19 +1,17 @@
 {
   project : {
-    name : 'xlabs.api',
+    name : 'xlabs.api.test',
     version : '1.0.0',
     author : 'josh.epidev',
 
     app : {
-      name : 'xlabs-api',
+      name : 'xlabs.api.test',
       output : 'bin/',
-      main : 'Xlabs',
-      package : 'xlabs',
     },
 
     build : {
-      dependencies : {},
-      defines: ['web', 'arch-web']
+      flags : ["-lib xlabs.api", "-lib compiletime"],
+      dependencies : {"xlabs.api":"*"},
     },
 
     files : {
