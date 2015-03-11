@@ -6,6 +6,7 @@ import js.Error;
 
 typedef Point = {var x:Float; var y:Float;};
 
+@author('Josh.epidev')
 @:final
 class Xlabs{
 
@@ -23,10 +24,11 @@ class Xlabs{
     untyped window.xLabs = new Xlabs();
   }
 
-  public function new(){ 
-    Browser.document.addEventListener("xLabsApiReady", onApiReady);
-    Browser.document.addEventListener("xLabsApiState", function(event){onApiState(event.detail);});
-    Browser.document.addEventListener("xLabsApiIdPath", function(event){onApiIdPath(event.detail);});
+  public function new(){
+    var doc = Browser.document;
+    doc.addEventListener("xLabsApiReady", onApiReady);
+    doc.addEventListener("xLabsApiState", function(event){onApiState(event.detail);});
+    doc.addEventListener("xLabsApiIdPath", function(event){onApiIdPath(event.detail);});
   }
 
   public function setConfig(path:String, value):Void{
@@ -35,10 +37,12 @@ class Xlabs{
     Browser.window.postMessage(message, '*');
   }
 
-  public function getConfig(path:String){
+  /* real nasty retrieval - don't use*/
+  @:deprecated
+  prublic function getConfig(path:String){
     return getObjectProperty(config, path);
   }
-  //need to look into this. apparently for json extraction
+  @:deprecated
   private function getObjectProperty(object:Null<Dynamic>, path:String){
     if(object == null || object.length == 0) return "";
     var parts:Array<String> = path.split(".");
@@ -73,18 +77,24 @@ class Xlabs{
 
   public function addCalibrationTruth(t1:Float, t2:Float, xScreen, yScreen):Void{
     var csv = t1+","+t2+","+xScreen+","+yScreen;
+#if debug
     trace("truth: "+csv);
+#end
     setConfig("truth.append", csv);
   }
 
   public function calibrate(?id="3p"):Void{
     setConfig("calibration.request", id);
+#if debug
     trace("Calibrating..");
+#end
   }
 
   public function calibrationClear():Void{
     setConfig("calibration.clear", null);
+#if debug
     trace("Clearing calibration...");
+#end
   }
 
   //////////////////////////////////
@@ -100,9 +110,7 @@ class Xlabs{
     var screen = Browser.window.screen;
     var w = screen.width * dppx;
     var h = screen.height * dppx;
-    var z = calcDpi(w, h, 13.3, 'd');
-    trace(z);
-    return z;
+    return calcDpi(w, h, 13.3, 'd');
   }
 
   /* Calculate PPI/DPI
@@ -188,7 +196,7 @@ class Xlabs{
     if(callbackIdPath != null) callbackIdPath(detail.id, detail.path);
   }
 
-  public function setup(callbackReady:Void->Void, callbackState:Void->Void, callbackIdPath:String->String->Void){
+  public function setup(?callbackReady:Void->Void, ?callbackState:Void->Void, ?callbackIdPath:String->String->Void){
     this.callbackReady = callbackReady;
     this.callbackState = callbackState;
     this.callbackIdPath = callbackIdPath;

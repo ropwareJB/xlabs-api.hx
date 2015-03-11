@@ -7,7 +7,7 @@
     app : {
       name : 'xlabs-api',
       output : 'bin/',
-      main : 'Xlabs',
+      main : 'xlabs.Xlabs',
       package : 'xlabs',
     },
 
