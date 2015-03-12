@@ -20,6 +20,9 @@ class Xlabs{
   inline static var DPI_MATCH_MEDIA = "(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 1.5),(-moz-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)";
   inline static var DOC_OFFSET_ERROR_MSG = "Should not call scr2doc() unless mouse moved, i.e. browser.document.offset.ready == 1";
 
+
+  public function getHead():Head return new Head(untyped config.state.head);
+
   public static function main(){
     untyped window.xLabs = new Xlabs();
   }
@@ -39,7 +42,7 @@ class Xlabs{
 
   /* real nasty retrieval - don't use*/
   @:deprecated
-  prublic function getConfig(path:String){
+  public function getConfig(path:String){
     return getObjectProperty(config, path);
   }
   @:deprecated
@@ -177,6 +180,7 @@ class Xlabs{
       y: doc2scrY(docY)
     };
   }
+
 
   /////////////////////////////////////////////////////
   // Setup

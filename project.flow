@@ -5,10 +5,11 @@
     author : 'josh.epidev',
 
     app : {
-      name : 'xlabs-api',
+      name : 'xlabs.api',
       output : 'bin/',
       main : 'xlabs.Xlabs',
       package : 'xlabs',
+      codepaths : ['src']
     },
 
     build : {
